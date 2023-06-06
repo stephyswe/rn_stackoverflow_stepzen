@@ -1,8 +1,10 @@
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import { useSearchParams } from "expo-router";
 import QuestionHeader from "../src/components/QuestionHeader";
-// @ts-ignore
+
 import questions from "../data/questions";
+import answers from "../data/answers";
+import AnswerListItem from "../src/components/AnswerListItem";
 
 const QuestionDetailsPage = () => {
   const { id } = useSearchParams();
@@ -15,7 +17,11 @@ const QuestionDetailsPage = () => {
 
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
-      <QuestionHeader question={question} />
+      <FlatList
+        data={answers.items}
+        renderItem={({ item }) => <AnswerListItem answer={item} />}
+        ListHeaderComponent={() => <QuestionHeader question={question} />}
+      />
     </View>
   );
 };
