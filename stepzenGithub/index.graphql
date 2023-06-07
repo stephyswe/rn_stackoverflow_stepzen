@@ -1,0 +1,3 @@
+schema @sdl(files: ["github.graphql"]) {
+  query: Query
+}

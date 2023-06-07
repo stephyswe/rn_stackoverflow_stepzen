@@ -1,0 +1,76 @@
+type Query {
+  getCommits(owner: String!, name: String!): [Commit]
+    @rest(
+      endpoint: "https://api.github.com/repos/$owner/$name/commits"
+      configuration: "githubconfig"
+    )
+
+  getCommit(owner: String!, name: String!, ref: String!): Commit
+    @rest(
+      endpoint: "https://api.github.com/repos/$owner/$name/commits/$ref"
+      configuration: "githubconfig"
+    )
+
+  getDiff(owner: String!, name: String!, base: String!, head: String!): Diff
+    @rest(
+      endpoint: "https://api.github.com/repos/$owner/$name/compare/$base...$head"
+      configuration: "githubconfig"
+    )
+}
+
+type Diff {
+  url: String!
+  html_url: String!
+  permalink_url: String!
+  diff_url: String!
+  patch_url: String!
+  base_commit: Commit!
+  merge_base_commit: Commit!
+  status: String!
+  ahead_by: Int!
+  behind_by: Int!
+  total_commits: Int!
+  commits: [Commit!]!
+  files: [File!]!
+}
+
+type File {
+  sha: String!
+  filename: String!
+  status: String!
+  additions: Int!
+  deletions: Int!
+  changes: Int!
+  blob_url: String!
+  raw_url: String!
+  contents_url: String!
+  patch: String
+}
+
+type Commit {
+  sha: ID!
+  commit: CommitDetail!
+  url: String!
+  html_url: String!
+  comments_url: String!
+}
+
+type CommitDetail {
+  author: Author!
+  committer: Committer!
+  message: String!
+  url: String!
+  comment_count: Int!
+}
+
+type Author {
+  name: String!
+  email: String!
+  date: String!
+}
+
+type Committer {
+  name: String!
+  email: String!
+  date: String!
+}

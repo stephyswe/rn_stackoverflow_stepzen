@@ -1,0 +1,6 @@
+{
+  "endpoint": "api/github",
+  "configuration": "config.yaml",
+  "schemapath": ".",
+  "overwrite": true
+}

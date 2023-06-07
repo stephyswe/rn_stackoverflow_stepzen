@@ -1,0 +1,4 @@
+configurationset:
+  - configuration:
+      name: githubconfig
+      Authorization: "Bearer GITHUB_TOKEN"
